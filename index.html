@@ -11,7 +11,7 @@
     <title>Weather Where You Want To Be</title>
 </head>
 <body>
-    <nav class="navbar sticky-top navbar-dark bg-dark justify-content-center">
+    <nav class="navbar  navbar-dark bg-dark justify-content-center">
         <h1>Weather Where You Want To Be</h1>
       </nav>
       <div class="wrapper">
@@ -19,8 +19,8 @@
         <nav class="sidenav">
             <h2>Search for a City</h2>
             <form class="form-inline">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <input class="form-control mr-sm-2 cityInput" type="search" placeholder="Enter City Here" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0 searchBtn" type="submit">Search</button>
               </form>
         </nav>
         <!-- Page Content -->
@@ -28,25 +28,22 @@
     
             <div class="card">
                 <div class="card-header">
-                  <h2>City Name</h2>
+                  <h2 class ='cityName'></h2>
                 </div>
                 <div class="card-body">
-                  <h5 class="card-title">Info About The City</h5>
-                  <p class="card-text">More City Info</p>
-                  <p class="card-text">More City Info</p>
-                  <p class="card-text">More City Info</p>
+                  <p class="card-text">Temperature: <span class='tempSpan'></span></p>
+                  <p class="card-text">Humidity: <span class='humidSpan'></span></p>
+                  <p class="card-text">Wind Speed: <span class=windSpan'></span></p>
+                  <p class="card-text">UV Index: <buttton class='uvBtn'></button></p>
                 </div>
               </div>
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <!-- Popper.JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-    <!-- Bootstrap JS -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
-    <!-- jQuery Custom Scroller CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script
+  src="https://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
     <script src="assets/script.js"></script>
 </body>
 </html>
