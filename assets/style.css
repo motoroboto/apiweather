@@ -1,0 +1,38 @@
+h1 {
+    color: whitesmoke;
+    padding: 10px;
+}
+
+h2 {
+    color: black;
+}
+
+.wrapper {
+    display: flex;
+    width: 100%;
+}
+
+.sidenav {
+    width: 400px;
+    padding-left: 10px;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 999;
+    background: #eeeeee;
+    color: #fff;
+    transition: all 0.3s;
+}
+
+.sidenav a {
+    padding: 20px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+  }
+
+.card {
+    margin: 20px;
+    width: 50vw;
+}
