@@ -1,13 +1,13 @@
 var today = new Date();
-var date = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
+var date = (today.getMonth()+1)+'/'+today.getDate()+'/'+today.getFullYear();
 var cityLat = '';
 var cityLon = '';
+
 
 function displayCityWeather(event) {
     event.preventDefault();
     var city = $('.cityInput').val().trim();
     var queryURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=imperial&appid=f82f3320f3be5227d4c1e1a02d86687b';
-  
 
     $.ajax({
       url: queryURL,
@@ -23,8 +23,9 @@ function displayCityWeather(event) {
       $('.tempSpan').replaceWith('<span class="tempSpan">' + responseWeather.main.temp + '°F</span>');
       $('.humidSpan').replaceWith('<span class="humidSpan">' + responseWeather.main.humidity + '%</span>');
       $('.windSpan').replaceWith('<span class="windSpan">' + responseWeather.wind.speed + ' MPH</span>');
-      $('.cities').append('<li class="' + responseWeather.name + '">' + responseWeather.name + '</li>');
+      $('.cities').append('<button type="button" class="city btn btn-outline-secondary ' + responseWeather.name + '">' + responseWeather.name + '</button>');
       displayCityUv() 
+      $('.cityInput').val('')
     });
    
 };

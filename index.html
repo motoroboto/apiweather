@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <!-- Scrollbar Custom CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
-
     <link rel="stylesheet" href="assets/style.css">
     <title>Weather Where You Want To Be</title>
 </head>
@@ -22,15 +21,13 @@
                 <input class="form-control mr-sm-2 cityInput" type="search" placeholder="Enter City Here" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0 searchBtn" type="submit">Search</button>
               </form>
-              <ul class='cities'></ul>
+              <div class='cities'></div>
         </nav>
         <!-- Page Content -->
         <div id="content">
             <div class="card">
-                <div class="card-header">
-                  <h2 class ='cityName'></h2>
-                </div>
                 <div class="card-body">
+                    <h2 class ='cityName'></h2>
                   <p class="card-text">Temperature: <span class='tempSpan'></span></p>
                   <p class="card-text">Humidity: <span class='humidSpan'></span></p>
                   <p class="card-text">Wind Speed: <span class='windSpan'></span></p>
