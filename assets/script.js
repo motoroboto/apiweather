@@ -4,14 +4,15 @@ var forecastDate2 = moment().add(2, 'day').format("MM/DD/YYYY");
 var forecastDate3 = moment().add(3, 'day').format("MM/DD/YYYY");
 var forecastDate4 = moment().add(4, 'day').format("MM/DD/YYYY");
 var forecastDate5 = moment().add(5, 'day').format("MM/DD/YYYY");
-
 var cityLat = '';
 var cityLon = '';
+var cityList = localStorage.citiesStored.split(',');
+var city = cityList[cityList.length -1];
 
 
 function displayCityWeather(event) {
     event.preventDefault();
-    var city = $('.cityInput').val().trim();
+    city = $('.cityInput').val().trim();
     var queryURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=imperial&appid=f82f3320f3be5227d4c1e1a02d86687b';
 
     $.ajax({
@@ -28,11 +29,44 @@ function displayCityWeather(event) {
       $('.tempSpan').replaceWith('<span class="tempSpan">' + responseWeather.main.temp + ' °F</span>');
       $('.humidSpan').replaceWith('<span class="humidSpan">' + responseWeather.main.humidity + '%</span>');
       $('.windSpan').replaceWith('<span class="windSpan">' + responseWeather.wind.speed + ' MPH</span>');
-      $('.cities').append('<button type="button" class="city btn btn-outline-secondary ' + responseWeather.name + '">' + responseWeather.name + '</button>');
+      $('.cities').append('<button type="button" class="city btn btn-outline-secondary" id="' + responseWeather.name + '">' + responseWeather.name + '</button>');
       displayCityUv() 
-      $('.cityInput').val('')
+      $('.cityInput').val('');
+      var cityList = localStorage.getItem('citiesStored');
+    cityList = cityList ? cityList.split(',') : [];
+    cityList.push(city);
+    localStorage.setItem('citiesStored', cityList.toString());
     });
+    
    
+};
+
+function displaySavedWeather(event) {
+  event.preventDefault();
+  city = this.id;
+  console.log('this:', this)
+
+  console.log('city:', city)
+  var queryURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=imperial&appid=f82f3320f3be5227d4c1e1a02d86687b';
+
+  $.ajax({
+    url: queryURL,
+    method: 'GET',
+  }).then(function (responseWeather) {
+    var passLat = responseWeather.coord.lat;
+    cityLon = responseWeather.coord.lon;
+    cityLat = passLat;
+    console.log('weather data response:', responseWeather);
+    var iconCode = responseWeather.weather[0].icon;
+    var iconUrl = 'http://openweathermap.org/img/w/' + iconCode + '.png';
+    $('.cityName').replaceWith('<h3 class="cityName">' + responseWeather.name + ' (' + today + ') <img src="' + iconUrl + '"></h3>');
+    $('.tempSpan').replaceWith('<span class="tempSpan">' + responseWeather.main.temp + ' °F</span>');
+    $('.humidSpan').replaceWith('<span class="humidSpan">' + responseWeather.main.humidity + '%</span>');
+    $('.windSpan').replaceWith('<span class="windSpan">' + responseWeather.wind.speed + ' MPH</span>');
+    displayCityUv() 
+    $('.cityInput').val('')
+  });
+ 
 };
 
 function displayCityUv() {
@@ -65,10 +99,9 @@ function displayCityUv() {
 };
 
 function displayCityForecast() {
-  var city = $('.cityInput').val().trim();
   var queryURL = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&units=imperial&appid=f82f3320f3be5227d4c1e1a02d86687b';
   $('.forecastBlocks').empty()
-  $('.forecastHeader').replaceWith('<h3 class="forecastHeader">5-Day Forcast</h3>');
+  $('.forecastHeader').replaceWith('<h3 class="forecastHeader">5-Day Forcast:</h3>');
   $.ajax({
     url: queryURL,
     method: 'GET',
@@ -136,4 +169,33 @@ $('.forecastBlocks').append('<button type="button" class="forecast btn btn-prima
 
 };
 
+function renderCities() {
+  // console.log('cities:', cityList);
+  for (var i = 0; i < cityList.length; i++) {
+    $('.cities').append('<button type="button" class="city btn btn-outline-secondary" id="' + cityList[i] + '">' + cityList[i] + '</button>');
+  }
+  city = cityList[cityList.length - 1];
+  var queryURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=imperial&appid=f82f3320f3be5227d4c1e1a02d86687b';
+
+    $.ajax({
+      url: queryURL,
+      method: 'GET',
+    }).then(function (responseWeather) {
+      var passLat = responseWeather.coord.lat;
+      cityLon = responseWeather.coord.lon;
+      cityLat = passLat;
+      console.log('weather data response:', responseWeather);
+      var iconCode = responseWeather.weather[0].icon;
+      var iconUrl = 'http://openweathermap.org/img/w/' + iconCode + '.png';
+      $('.cityName').replaceWith('<h3 class="cityName">' + responseWeather.name + ' (' + today + ') <img src="' + iconUrl + '"></h3>');
+      $('.tempSpan').replaceWith('<span class="tempSpan">' + responseWeather.main.temp + ' °F</span>');
+      $('.humidSpan').replaceWith('<span class="humidSpan">' + responseWeather.main.humidity + '%</span>');
+      $('.windSpan').replaceWith('<span class="windSpan">' + responseWeather.wind.speed + ' MPH</span>');
+      displayCityUv() 
+      $('.cityInput').val('');
+});
+};
+
+renderCities();
 $(document).on('click', '.searchBtn', displayCityWeather);
+$(document).on('click', '.city', displaySavedWeather);
