@@ -58,10 +58,13 @@ li {
 
 }
 
-.uvBtn {
-    border-radius: 3px;
+.btn-orange {
+    background: orange;
+}
+
+.btn-extreme {
+    background: purple;
     color: white;
-    background: blue;
 }
 
 .cities {

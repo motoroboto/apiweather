@@ -40,7 +40,19 @@ function displayCityUv() {
     method: 'GET',
   }).then(function (responseUv) {
     console.log('UV data response:', responseUv)
-    $('.uvSpan').replaceWith('<span class="uvSpan"><button class="uvBtn">' + responseUv.value + '</button></span>');
+    var uvIndex = responseUv.value
+
+    if (uvIndex < 3) {
+    $('.uvSpan').replaceWith('<span class="uvSpan"><button type "button" class="uvBtn btn btn-success">' + uvIndex + '</button></span>');
+    } else if (uvIndex < 6) {
+    $('.uvSpan').replaceWith('<span class="uvSpan"><button type "button" class="uvBtn btn btn-warning">' + uvIndex + '</button></span>');
+    } else if (uvIndex < 8) {
+    $('.uvSpan').replaceWith('<span class="uvSpan"><button type "button" class="uvBtn btn btn-orange">' + uvIndex + '</button></span>');
+    } else if (uvIndex < 11) {
+    $('.uvSpan').replaceWith('<span class="uvSpan"><button type "button" class="uvBtn btn btn-danger">' + uvIndex + '</button></span>');
+    } else if (uvIndex >= 11) {
+    $('.uvSpan').replaceWith('<span class="uvSpan"><button type "button" class="uvBtn btn btn-extreme">' + uvIndex + '</button></span>');
+    }
   });
 
   displayCityForecast()
