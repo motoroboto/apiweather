@@ -36,3 +36,30 @@ h2 {
     margin: 20px;
     width: 50vw;
 }
+
+.forecast {
+    margin: 20px;
+    border-radius: 5px;
+    background-color: rgb(53, 126, 223);
+    color: rgb(252, 251, 246);
+    width: 150px;
+}
+
+ul {
+    margin-top: 20px;
+}
+
+li {
+    border: black;
+    padding: 5px;
+    border-style: thin;
+    list-style: none;
+    color: black;
+
+}
+
+.uvBtn {
+    border-radius: 3px;
+    color: white;
+    background: blue;
+}

@@ -1,37 +1,61 @@
-// api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
+var today = new Date();
+var date = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
+var cityLat = '';
+var cityLon = '';
 
-function displayCityWeather(f) {
-    f.preventDefault();
+function displayCityWeather(event) {
+    event.preventDefault();
     var city = $('.cityInput').val().trim();
-    var queryURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=f82f3320f3be5227d4c1e1a02d86687b';
+    var queryURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=imperial&appid=f82f3320f3be5227d4c1e1a02d86687b';
   
 
     $.ajax({
       url: queryURL,
       method: 'GET',
     }).then(function (responseWeather) {
-      console.log('response:', responseWeather)
-      console.log('current weather')
+      var passLat = responseWeather.coord.lat;
+      cityLon = responseWeather.coord.lon;
+      cityLat = passLat;
+      console.log('weather data response:', responseWeather);
+      var iconCode = responseWeather.weather[0].icon;
+      var iconUrl = 'http://openweathermap.org/img/w/' + iconCode + '.png';
+      $('.cityName').replaceWith('<h3 class="cityName">' + responseWeather.name + ' (' + date + ') <img src="' + iconUrl + '"></h3>');
+      $('.tempSpan').replaceWith('<span class="tempSpan">' + responseWeather.main.temp + '°F</span>');
+      $('.humidSpan').replaceWith('<span class="humidSpan">' + responseWeather.main.humidity + '%</span>');
+      $('.windSpan').replaceWith('<span class="windSpan">' + responseWeather.wind.speed + ' MPH</span>');
+      $('.cities').append('<li class="' + responseWeather.name + '">' + responseWeather.name + '</li>');
+      displayCityUv() 
     });
-      
+   
+};
 
+function displayCityUv() {
+  var lat = cityLat;
+  var lon = cityLon;
+  var queryURL = 'https://api.openweathermap.org/data/2.5/uvi?lat=' + lat + '&lon=' + lon + '&appid=f82f3320f3be5227d4c1e1a02d86687b';
+
+  $.ajax({
+    url: queryURL,
+    method: 'GET',
+  }).then(function (responseUv) {
+    console.log('UV data response:', responseUv)
+    $('.uvSpan').replaceWith('<span class="uvSpan"><button class="uvBtn">' + responseUv.value + '</button></span>');
+  });
+
+  displayCityForecast()
 
 };
 
-// api.openweathermap.org/data/2.5/forecast/daily?q={city name}&cnt={cnt}&appid={API key}
-
-function displayCityForecast(f2) {
-  f2.preventDefault();
+function displayCityForecast() {
   var city = $('.cityInput').val().trim();
-  var queryURL = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=f82f3320f3be5227d4c1e1a02d86687b';
+  var queryURL = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&units=imperial&appid=f82f3320f3be5227d4c1e1a02d86687b';
 
 
   $.ajax({
     url: queryURL,
     method: 'GET',
   }).then(function (responseForecast) {
-    console.log('response:', responseForecast)
-    console.log('forecast')
+    console.log('Forecast Data response:', responseForecast)
   });
     
 
@@ -39,4 +63,3 @@ function displayCityForecast(f2) {
 };
 
 $(document).on('click', '.searchBtn', displayCityWeather);
-$(document).on('click', '.searchBtn', displayCityForecast);
