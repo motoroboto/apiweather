@@ -6,7 +6,7 @@ var forecastDate4 = moment().add(4, 'day').format("MM/DD/YYYY");
 var forecastDate5 = moment().add(5, 'day').format("MM/DD/YYYY");
 var cityLat = '';
 var cityLon = '';
-var cityList = localStorage.citiesStored.split(',');
+var cityList = '';
 var city = cityList[cityList.length -1];
 
 
@@ -22,7 +22,6 @@ function displayCityWeather(event) {
       var passLat = responseWeather.coord.lat;
       cityLon = responseWeather.coord.lon;
       cityLat = passLat;
-      console.log('weather data response:', responseWeather);
       var iconCode = responseWeather.weather[0].icon;
       var iconUrl = 'http://openweathermap.org/img/w/' + iconCode + '.png';
       $('.cityName').replaceWith('<h3 class="cityName">' + responseWeather.name + ' (' + today + ') <img src="' + iconUrl + '"></h3>');
@@ -36,6 +35,7 @@ function displayCityWeather(event) {
     cityList = cityList ? cityList.split(',') : [];
     cityList.push(city);
     localStorage.setItem('citiesStored', cityList.toString());
+    
     });
     
    
@@ -44,9 +44,6 @@ function displayCityWeather(event) {
 function displaySavedWeather(event) {
   event.preventDefault();
   city = this.id;
-  console.log('this:', this)
-
-  console.log('city:', city)
   var queryURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=imperial&appid=f82f3320f3be5227d4c1e1a02d86687b';
 
   $.ajax({
@@ -56,7 +53,6 @@ function displaySavedWeather(event) {
     var passLat = responseWeather.coord.lat;
     cityLon = responseWeather.coord.lon;
     cityLat = passLat;
-    console.log('weather data response:', responseWeather);
     var iconCode = responseWeather.weather[0].icon;
     var iconUrl = 'http://openweathermap.org/img/w/' + iconCode + '.png';
     $('.cityName').replaceWith('<h3 class="cityName">' + responseWeather.name + ' (' + today + ') <img src="' + iconUrl + '"></h3>');
@@ -78,7 +74,6 @@ function displayCityUv() {
     url: queryURL,
     method: 'GET',
   }).then(function (responseUv) {
-    console.log('UV data response:', responseUv)
     var uvIndex = responseUv.value
 
     if (uvIndex < 3) {
@@ -106,7 +101,6 @@ function displayCityForecast() {
     url: queryURL,
     method: 'GET',
   }).then(function (responseForecast) {
-    console.log('Forecast Data response:', responseForecast)
     var iconCode = responseForecast.list[7].weather[0].icon;
     var iconUrl = 'http://openweathermap.org/img/w/' + iconCode + '.png';
   $('.forecastBlocks').append('<button type="button" class="forecast btn btn-primary"><h5>'
@@ -170,7 +164,11 @@ $('.forecastBlocks').append('<button type="button" class="forecast btn btn-prima
 };
 
 function renderCities() {
-  // console.log('cities:', cityList);
+
+  if (localStorage.citiesStored == null) {
+    return; 
+  } else {
+    cityList = localStorage.citiesStored.split(',');
   for (var i = 0; i < cityList.length; i++) {
     $('.cities').append('<button type="button" class="city btn btn-outline-secondary" id="' + cityList[i] + '">' + cityList[i] + '</button>');
   }
@@ -184,7 +182,6 @@ function renderCities() {
       var passLat = responseWeather.coord.lat;
       cityLon = responseWeather.coord.lon;
       cityLat = passLat;
-      console.log('weather data response:', responseWeather);
       var iconCode = responseWeather.weather[0].icon;
       var iconUrl = 'http://openweathermap.org/img/w/' + iconCode + '.png';
       $('.cityName').replaceWith('<h3 class="cityName">' + responseWeather.name + ' (' + today + ') <img src="' + iconUrl + '"></h3>');
@@ -194,8 +191,14 @@ function renderCities() {
       displayCityUv() 
       $('.cityInput').val('');
 });
+  }
 };
 
 renderCities();
 $(document).on('click', '.searchBtn', displayCityWeather);
 $(document).on('click', '.city', displaySavedWeather);
+$(document).on('click', '.clear', function() {
+  // event.preventDefault();
+  localStorage.clear();
+  $('.cities').empty;
+  });
