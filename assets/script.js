@@ -1,5 +1,10 @@
-var today = new Date();
-var date = (today.getMonth()+1)+'/'+today.getDate()+'/'+today.getFullYear();
+var today = moment().format("MM/DD/YYYY");
+var forecastDate1 = moment().add(1, 'day').format("MM/DD/YYYY");
+var forecastDate2 = moment().add(2, 'day').format("MM/DD/YYYY");
+var forecastDate3 = moment().add(3, 'day').format("MM/DD/YYYY");
+var forecastDate4 = moment().add(4, 'day').format("MM/DD/YYYY");
+var forecastDate5 = moment().add(5, 'day').format("MM/DD/YYYY");
+
 var cityLat = '';
 var cityLon = '';
 
@@ -19,8 +24,8 @@ function displayCityWeather(event) {
       console.log('weather data response:', responseWeather);
       var iconCode = responseWeather.weather[0].icon;
       var iconUrl = 'http://openweathermap.org/img/w/' + iconCode + '.png';
-      $('.cityName').replaceWith('<h3 class="cityName">' + responseWeather.name + ' (' + date + ') <img src="' + iconUrl + '"></h3>');
-      $('.tempSpan').replaceWith('<span class="tempSpan">' + responseWeather.main.temp + '°F</span>');
+      $('.cityName').replaceWith('<h3 class="cityName">' + responseWeather.name + ' (' + today + ') <img src="' + iconUrl + '"></h3>');
+      $('.tempSpan').replaceWith('<span class="tempSpan">' + responseWeather.main.temp + ' °F</span>');
       $('.humidSpan').replaceWith('<span class="humidSpan">' + responseWeather.main.humidity + '%</span>');
       $('.windSpan').replaceWith('<span class="windSpan">' + responseWeather.wind.speed + ' MPH</span>');
       $('.cities').append('<button type="button" class="city btn btn-outline-secondary ' + responseWeather.name + '">' + responseWeather.name + '</button>');
@@ -62,16 +67,72 @@ function displayCityUv() {
 function displayCityForecast() {
   var city = $('.cityInput').val().trim();
   var queryURL = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&units=imperial&appid=f82f3320f3be5227d4c1e1a02d86687b';
-
-
+  $('.forecastBlocks').empty()
+  $('.forecastHeader').replaceWith('<h3 class="forecastHeader">5-Day Forcast</h3>');
   $.ajax({
     url: queryURL,
     method: 'GET',
   }).then(function (responseForecast) {
     console.log('Forecast Data response:', responseForecast)
+    var iconCode = responseForecast.list[7].weather[0].icon;
+    var iconUrl = 'http://openweathermap.org/img/w/' + iconCode + '.png';
+  $('.forecastBlocks').append('<button type="button" class="forecast btn btn-primary"><h5>'
+  + forecastDate1 + 
+  '</h5><img src="'
+   + iconUrl + 
+   '"><p>Temp: '
+   + responseForecast.list[7].main.temp + 
+   ' °F</p><p>Humidity: '
+   + responseForecast.list[7].main.humidity +
+   '%</p></button>');
+  
+   var iconCode = responseForecast.list[15].weather[0].icon;
+   var iconUrl = 'http://openweathermap.org/img/w/' + iconCode + '.png';
+   $('.forecastBlocks').append('<button type="button" class="forecast btn btn-primary"><h5>'
+   + forecastDate2 + 
+   '</h5><img src="'
+     + iconUrl + 
+  '"><p>Temp: '
+  + responseForecast.list[15].main.temp + 
+  ' °F</p><p>Humidity: '
+  + responseForecast.list[15].main.humidity +
+  '%</p></button>');
+ 
+  var iconCode = responseForecast.list[23].weather[0].icon;
+  var iconUrl = 'http://openweathermap.org/img/w/' + iconCode + '.png';
+  $('.forecastBlocks').append('<button type="button" class="forecast btn btn-primary"><h5>'
+  + forecastDate3 + 
+  '</h5><img src="' + iconUrl + 
+ '"><p>Temp: '
+ + responseForecast.list[23].main.temp + 
+ ' °F</p><p>Humidity: '
+ + responseForecast.list[23].main.humidity +
+ '%</p></button>');
+
+ var iconCode = responseForecast.list[31].weather[0].icon;
+ var iconUrl = 'http://openweathermap.org/img/w/' + iconCode + '.png';
+ $('.forecastBlocks').append('<button type="button" class="forecast btn btn-primary"><h5>'
+ + forecastDate4 + 
+ '</h5><img src="'+ iconUrl + 
+'"><p>Temp: '
++ responseForecast.list[31].main.temp + 
+' °F</p><p>Humidity: '
++ responseForecast.list[31].main.humidity +
+'%</p></button>');
+
+var iconCode = responseForecast.list[39].weather[0].icon;
+var iconUrl = 'http://openweathermap.org/img/w/' + iconCode + '.png';
+$('.forecastBlocks').append('<button type="button" class="forecast btn btn-primary"><h5>'
+  + forecastDate5 + 
+  '</h5><img src="'+ iconUrl + 
+'"><p>Temp: '
++ responseForecast.list[39].main.temp + 
+' °F</p><p>Humidity: '
++ responseForecast.list[39].main.humidity +
+'%</p></button>');
+
   });
     
-
 
 };
 

@@ -38,11 +38,17 @@ h2 {
 }
 
 .forecast {
-    margin: 20px;
+    margin-left: 20px;
+    margin-right: 10px;
     border-radius: 5px;
     background-color: rgb(53, 126, 223);
     color: rgb(252, 251, 246);
     width: 150px;
+}
+
+.forecastHeader {
+    margin-left: 20px;
+    margin-bottom: 10px;
 }
 
 ul {
@@ -69,11 +75,13 @@ li {
 
 .cities {
     margin-top: 20px;
+    width: 90%;
 }
 
 .city {
    margin-right: 10px;
    margin-left: 10px;
+   background: white;
     /* border-style: solid; */
     /* float: left; */
     width: 90%;

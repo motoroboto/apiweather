@@ -21,7 +21,7 @@
                 <input class="form-control mr-sm-2 cityInput" type="search" placeholder="Enter City Here" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0 searchBtn" type="submit">Search</button>
               </form>
-              <div class='cities'></div>
+              <div class='cities btn-group-vertical'></div>
         </nav>
         <!-- Page Content -->
         <div id="content">
@@ -34,17 +34,18 @@
                   <p class="card-text">UV Index: <span class='uvSpan'></span></p>
                 </div>
             </div>
-            <div class="forecast">
-                <p>some content</p>
-                <p>other things</p>
+            <h3 class="forecastHeader"></h3>
+            <div class="forecastBlocks">
+             
             </div>
         </div>
     </div>
 
     <script
-  src="https://code.jquery.com/jquery-3.5.1.js"
-  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-  crossorigin="anonymous"></script>
+        src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="assets/script.js"></script>
 </body>
 </html>
