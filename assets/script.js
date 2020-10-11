@@ -198,7 +198,6 @@ renderCities();
 $(document).on('click', '.searchBtn', displayCityWeather);
 $(document).on('click', '.city', displaySavedWeather);
 $(document).on('click', '.clear', function() {
-  // event.preventDefault();
   localStorage.clear();
-  $('.cities').empty;
+  $('.cities').empty();
   });
