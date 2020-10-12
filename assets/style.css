@@ -40,6 +40,7 @@ h2 {
 .forecast {
     margin-left: 20px;
     margin-right: 10px;
+    margin-bottom: 20px;
     border-radius: 5px;
     background-color: rgb(53, 126, 223);
     color: rgb(252, 251, 246);

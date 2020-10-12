@@ -23,7 +23,7 @@ function displayCityWeather(event) {
       cityLon = responseWeather.coord.lon;
       cityLat = passLat;
       var iconCode = responseWeather.weather[0].icon;
-      var iconUrl = 'http://openweathermap.org/img/w/' + iconCode + '.png';
+      var iconUrl = 'https://openweathermap.org/img/w/' + iconCode + '.png';
       $('.cityName').replaceWith('<h3 class="cityName">' + responseWeather.name + ' (' + today + ') <img src="' + iconUrl + '"></h3>');
       $('.tempSpan').replaceWith('<span class="tempSpan">' + responseWeather.main.temp + ' °F</span>');
       $('.humidSpan').replaceWith('<span class="humidSpan">' + responseWeather.main.humidity + '%</span>');
@@ -54,7 +54,7 @@ function displaySavedWeather(event) {
     cityLon = responseWeather.coord.lon;
     cityLat = passLat;
     var iconCode = responseWeather.weather[0].icon;
-    var iconUrl = 'http://openweathermap.org/img/w/' + iconCode + '.png';
+    var iconUrl = 'https://openweathermap.org/img/w/' + iconCode + '.png';
     $('.cityName').replaceWith('<h3 class="cityName">' + responseWeather.name + ' (' + today + ') <img src="' + iconUrl + '"></h3>');
     $('.tempSpan').replaceWith('<span class="tempSpan">' + responseWeather.main.temp + ' °F</span>');
     $('.humidSpan').replaceWith('<span class="humidSpan">' + responseWeather.main.humidity + '%</span>');
@@ -102,7 +102,7 @@ function displayCityForecast() {
     method: 'GET',
   }).then(function (responseForecast) {
     var iconCode = responseForecast.list[7].weather[0].icon;
-    var iconUrl = 'http://openweathermap.org/img/w/' + iconCode + '.png';
+    var iconUrl = 'https://openweathermap.org/img/w/' + iconCode + '.png';
   $('.forecastBlocks').append('<button type="button" class="forecast btn btn-primary"><h5>'
   + forecastDate1 + 
   '</h5><img src="'
@@ -114,7 +114,7 @@ function displayCityForecast() {
    '%</p></button>');
   
    var iconCode = responseForecast.list[15].weather[0].icon;
-   var iconUrl = 'http://openweathermap.org/img/w/' + iconCode + '.png';
+   var iconUrl = 'https://openweathermap.org/img/w/' + iconCode + '.png';
    $('.forecastBlocks').append('<button type="button" class="forecast btn btn-primary"><h5>'
    + forecastDate2 + 
    '</h5><img src="'
@@ -126,7 +126,7 @@ function displayCityForecast() {
   '%</p></button>');
  
   var iconCode = responseForecast.list[23].weather[0].icon;
-  var iconUrl = 'http://openweathermap.org/img/w/' + iconCode + '.png';
+  var iconUrl = 'https://openweathermap.org/img/w/' + iconCode + '.png';
   $('.forecastBlocks').append('<button type="button" class="forecast btn btn-primary"><h5>'
   + forecastDate3 + 
   '</h5><img src="' + iconUrl + 
@@ -148,7 +148,7 @@ function displayCityForecast() {
 '%</p></button>');
 
 var iconCode = responseForecast.list[39].weather[0].icon;
-var iconUrl = 'http://openweathermap.org/img/w/' + iconCode + '.png';
+var iconUrl = 'https://openweathermap.org/img/w/' + iconCode + '.png';
 $('.forecastBlocks').append('<button type="button" class="forecast btn btn-primary"><h5>'
   + forecastDate5 + 
   '</h5><img src="'+ iconUrl + 
@@ -183,7 +183,7 @@ function renderCities() {
       cityLon = responseWeather.coord.lon;
       cityLat = passLat;
       var iconCode = responseWeather.weather[0].icon;
-      var iconUrl = 'http://openweathermap.org/img/w/' + iconCode + '.png';
+      var iconUrl = 'https://openweathermap.org/img/w/' + iconCode + '.png';
       $('.cityName').replaceWith('<h3 class="cityName">' + responseWeather.name + ' (' + today + ') <img src="' + iconUrl + '"></h3>');
       $('.tempSpan').replaceWith('<span class="tempSpan">' + responseWeather.main.temp + ' °F</span>');
       $('.humidSpan').replaceWith('<span class="humidSpan">' + responseWeather.main.humidity + '%</span>');
