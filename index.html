@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <!-- Scrollbar Custom CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+<script src="https://use.fontawesome.com/5fd15afac1.js"></script>
     <link rel="stylesheet" href="assets/style.css">
     <title>Weather Where You Want To Be</title>
 </head>
@@ -18,9 +19,12 @@
         <nav class="sidenav">
             <h2>Search for a City</h2>
             <form class="form-inline">
-                <input class="form-control mr-sm-2 cityInput" type="search" placeholder="Enter City Here" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0 searchBtn" type="submit">Search</button>
-              </form>
+                <form class="form-inline">
+                    <input type="search" class="form-control cityInput" placeholder="Enter City Here" aria-label="Search">
+                    <div class="input-group-append">
+                      <button class="btn btn-primary searchBtn" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    </div>
+                </form>
               <div class='cities btn-group-vertical'></div>
               <button class="clear btn btn-primary">Clear Search History</button>
         </nav>
