@@ -19,6 +19,7 @@ function displayCityWeather(event) {
       url: queryURL,
       method: 'GET',
     }).then(function (responseWeather) {
+      city = responseWeather.name;
       var passLat = responseWeather.coord.lat;
       cityLon = responseWeather.coord.lon;
       cityLat = passLat;
